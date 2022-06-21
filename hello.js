@@ -20,33 +20,23 @@ $input.addEventListener('input',onInput);
 
 //입력 button을 'click' 했을 때 제시어가 비어있다면, 비어있지 않다면 ~
 function onClickBtn () {
-	if(!word) {		//제시어가 비어 있는가?
+	if(!word || word[word.length-1] === newWord[0]) {		//제시어가 비어 있는가? 또는 유효성 검사 시 유효한가?
 		word = newWord ;
 		$word.textContent = word;
 		const order = parseInt($order.textContent); //함수 내부에서 선언을 해줘야 값을 계속해서 받아올 수 있음
-			if(order === playerNumber) {
-				$order.textContent = 1;
-			}
-			else {
-				$order.textContent = order + 1;
-			}
-	}
-	else if(word[word.length-1] === newWord[0]){	//유효성 검증
-		word = newWord;
-		$word.textContent = word;
-		const order = parseInt($order.textContent);
-			if(order === playerNumber) {
-				$order.textContent = 1;
-			}
-			else {
-				$order.textContent = order + 1;
-			}
-	}		
-	else {
-			console.log('틀렸습니다!');
+		if(order === playerNumber) {
 			$order.textContent = 1;
+		}
+		else {
+			$order.textContent = order + 1;
+		}
 	}
-
+	else {
+		alert('틀렸습니다!');
+		$order.textContent = 1;
+	}
+	
+	$input.focus();
 	$input.value ='';
 }
 
